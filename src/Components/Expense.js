@@ -31,7 +31,7 @@ export default function Expense({ user }) {
         return () => {
             unsubscribe() // cleanup code
         }
-    }, [])
+    }, [history, user])
 
     const addExpense = () => {
         if (text) {
