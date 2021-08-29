@@ -45,10 +45,11 @@ export default function Expense({ user }) {
 
     }
 
-    const deleteExpense = (deleteExpense) => {
+    const deleteExpense = (index) => {
         const docRef = db.collection('expenses').doc(user.uid);
         docRef.get().then(docSnap => {
-            const result = docSnap.data().expenses.filter(expense => expense != deleteExpense)
+            const result = docSnap.data().expenses;
+            result.splice(index, 1)
             docRef.update({
                 expenses: result
             })
@@ -67,10 +68,10 @@ export default function Expense({ user }) {
             }}>Add</button>
 
             <ul class="collection">
-                {myExpenses.map(expense => {
+                {myExpenses.map((expense, index) => {
                     return <li className="collection-item" key={new Date().getTime().toString}>
                         {expense}
-                        <i className="material-icons right" onClick={() => deleteExpense(expense)}>delete</i>
+                        <i className="material-icons right" onClick={() => deleteExpense(index)}>delete</i>
                     </li>
                 })}
 
