@@ -1,13 +1,26 @@
 import React, { useState } from 'react'
 import '../Styles/Signup.css'
+import { auth } from '../firebase'
+import { useHistory } from 'react-router-dom'
 
 export default function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const history = useHistory()
 
-    const handleOnSubmit = (e) => {
+    const handleOnSubmit = async (e) => {
         e.preventDefault();
         console.log(email, password);
+
+        try {
+            const result = await auth.createUserWithEmailAndPassword(email, password);
+            window.M.toast({ html: `welcone: ${result.user.email}`, classes: "green" });
+            history.push("/");
+        }
+        catch (err) {
+            window.M.toast({ html: err.message, classes: "red" });
+            console.log(err.message);
+        }
     }
     return (
         <div className="Signup center container">
