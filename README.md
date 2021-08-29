@@ -1,3 +1,30 @@
+![Expense-Manager](https://socialify.git.ci/N9shant/Expense-Manager/image?language=1&owner=1&pattern=Brick%20Wall&stargazers=1&theme=Dark)
+
+## Structure of the Project
+
+```terminal
+- public
+- src:               # All codes of this project is in src folder
+    - components     # This folder contains all the components used in this project.
+    - styles         # This folder contains all CSS files of components
+    - App.js
+    - index.js
+    - firebase.js    # This file contains firebase methods which are used for this project.
+- README.md
+```
+
+## Login Page
+
+![image](./public/login.PNG)
+
+## Signup Page
+
+![image](./public/signup.PNG)
+
+## Home Page
+
+![image](./public/add-expense.PNG)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

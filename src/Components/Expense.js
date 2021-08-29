@@ -34,9 +34,15 @@ export default function Expense({ user }) {
     }, [])
 
     const addExpense = () => {
-        db.collection('expenses').doc(user.uid).set({
-            expenses: [...myExpenses, text]
-        })
+        if (text) {
+            db.collection('expenses').doc(user.uid).set({
+                expenses: [...myExpenses, text]
+            })
+        }
+        else {
+            window.M.toast({ html: `Can't add an empty Expense`, classes: "red" });
+        }
+
     }
 
     const deleteExpense = (deleteExpense) => {
