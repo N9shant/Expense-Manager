@@ -1,16 +1,36 @@
+import { useState, useEffect } from 'react'
 import NavBar from './Components/NavBar'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Expense from './Components/Expense'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
+import { auth } from './firebase'
+
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      }
+      else {
+        setUser(null);
+      }
+    })
+
+    return () => {
+      unsubscribe();
+    }
+  }, [])
+
   return (
     <BrowserRouter className="App">
-      <NavBar />
+      <NavBar user={user} />
       <Switch>
         <Route exact path="/">
-          <Expense />
+          <Expense user={user} />
         </Route>
         <Route path="/login">
           <Login />
